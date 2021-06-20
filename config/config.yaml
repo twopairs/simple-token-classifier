@@ -1,0 +1,6 @@
+resource:
+  path: ../resource
+  dimension:
+    - GRADE: grade.yaml
+    - BED: bed.yaml
+    - VIEW: view.yaml

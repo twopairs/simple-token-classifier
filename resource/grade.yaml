@@ -1,0 +1,7 @@
+GRADE_ROOMONLY:
+  - order: roomonly
+  - anyorder: room only
+
+GRADE_DELUXE:
+  - order : deluxe
+  - order : de luxe
