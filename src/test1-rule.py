@@ -7,7 +7,7 @@ import factory.rule.RuleProvider
 
 
 if __name__ == "__main__":
-    # gloval constant
+    # global constant
     const = constant.Constant.Constant
 
     # config
@@ -18,9 +18,9 @@ if __name__ == "__main__":
 
     # rule provider
     rp = factory.rule.RuleProvider.Provider(ctx)
-    map = rp.buildDimensionMap()
+    rp.buildDimensionMap()
 
-    for n, v in map.items():
+    for n, v in rp.getRuleMap().items():
         print(n)
         print(v.toString())
 

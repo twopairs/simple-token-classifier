@@ -3,6 +3,7 @@ import module.YamlUtil
 import entity.rule.InvertedDimension
 import entity.rule.Code
 
+
 class Provider:
 
     def __init__(self, ctx):
@@ -10,20 +11,18 @@ class Provider:
         self.ruleMap = {}
         self.ctx = ctx
 
+    def getRuleMap(self):
+        return self.ruleMap
+
     def getDimensionList(self):
         return self.dimensionList
 
-    def buildRule(self, path):
-        # load dimension
-        dMap = self.buildDimensionMap()
-
-        # get inverted dimension
-
-
+    def getRules(self, ruleName):
+        if ruleName in self.ruleMap.keys():
+            return self.ruleMap.get(ruleName)
+        raise
 
     def buildDimensionMap(self):
-        dMap = {}
-
         # dir
         dirPath = self.ctx.conf['resource']['path']
 
@@ -37,12 +36,12 @@ class Provider:
                 if v == None:
                     raise
 
-                dimensionRoot =  module.YamlUtil.openYaml(os.path.join(dirPath, v))
+                dimensionRoot = module.YamlUtil.openYaml(os.path.join(dirPath, v))
                 codeMap = self.buildCodeMap(dimensionRoot)
                 inverted = entity.rule.InvertedDimension.InvertedDimension(self.ctx, codeMap)
-                dMap[n] = inverted
+                self.ruleMap[n] = inverted
 
-        return dMap
+                self.dimensionList.append(n)
 
     def buildCodeMap(self, root):
         codeList = []
@@ -62,7 +61,6 @@ class Provider:
 
                 # always len == 1
                 for n, v in nvMap.items():
-
                     if n in [self.ctx.const.ORDER, self.ctx.const.ANYORDER, self.ctx.const.COMBINATION]:
                         value = v
                         type = n
@@ -72,8 +70,7 @@ class Provider:
 
                 token = entity.rule.Token.Token(self.ctx, value, type)
                 code.addToken(token)
+
             codeList.append(code)
 
         return codeList
-
-

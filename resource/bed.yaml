@@ -2,5 +2,5 @@ BED_DOUBLE:
   - order : double
 
 BED_TWIN|BED_EA_2:
-  - combination : twin 2 beds
-  - combination : twin 2 bed
+  - order : twin 2 beds
+  - order : twin 2 bed
